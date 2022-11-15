@@ -6,12 +6,19 @@ import TestComponent from './component/test_component'
 import makeDoc from './util/make_doc'
 
 const Main = () => {
+  let text: string
+
   const downloadDoc = (e: React.MouseEvent<HTMLElement>, isDownload: boolean) => {
     e.preventDefault()
 
-    const quill = document.querySelector('#div_quill > .ql-editor')
+    if (text === undefined) {
+      const quill = document.querySelector('#div_quill > .ql-editor')
 
-    const doc = makeDoc(quill?.innerHTML ?? '', 'test')
+      text = `${quill?.innerHTML}`
+    }
+
+
+    const doc = makeDoc(text, 'test')
     if (isDownload) {
       doc.download()
     }
@@ -25,7 +32,7 @@ const Main = () => {
   return (
     <div className={styles.div_main}>
       <div>
-        <QuillComponent onChange={(value: string) => console.log({ value })}>
+        <QuillComponent onChange={(value: string) => text = value}>
           <TestComponent />
         </QuillComponent>
         <div className={styles.div_btn}>
