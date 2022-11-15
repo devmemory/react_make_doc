@@ -1,0 +1,17 @@
+.div_main {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.div_main > div:first-child {
+  max-width: 600px;
+}
+
+.div_btn {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
