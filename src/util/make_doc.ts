@@ -20,7 +20,7 @@ const makeDoc = (htmlText: string, fileName: string) => {
     </style>
     </head>
     <body>
-    ${htmlText}
+        ${htmlText}
     </body>
 </html>
 `;
@@ -32,12 +32,12 @@ const makeDoc = (htmlText: string, fileName: string) => {
         return url
     }
 
-    const getFile = async (url: string) => {
+    const url = makeDataUrl()
+
+    const getFile = async () => {
         const res = await fetch(url)
 
         const blob = await res.blob()
-
-        console.log({ blob })
 
         return new File([blob], getFileName())
     }
@@ -56,14 +56,8 @@ const makeDoc = (htmlText: string, fileName: string) => {
         return fileName.endsWith('.doc') ? fileName : `${fileName}.doc`
     }
 
-    const url = makeDataUrl()
-
-    console.log({ url })
-
     return {
-        getFile: async () => {
-            return await getFile(url)
-        },
+        getFile,
         download
     }
 };

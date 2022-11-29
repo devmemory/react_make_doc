@@ -21,6 +21,10 @@ const Main = () => {
     const doc = makeDoc(text, 'test')
     if (isDownload) {
       doc.download()
+    } else {
+      doc.getFile().then((file) => {
+        console.log({ file })
+      })
     }
   }
 
@@ -37,6 +41,7 @@ const Main = () => {
         </QuillComponent>
         <div className={styles.div_btn}>
           <CommonBtn styles={btnStyles} onClick={(e) => downloadDoc(e, true)}>다운로드</CommonBtn>
+          <CommonBtn styles={btnStyles} onClick={(e) => downloadDoc(e, false)}>파일 확인</CommonBtn>
         </div>
       </div>
     </div>
